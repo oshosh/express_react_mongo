@@ -1,4 +1,7 @@
-# react + express + mongoDB login 프로세스
+# react + express + mongoDB를 통한 회원가입, 로그인, 로그아웃 프로세스
+
+- 회원가입, 로그인, 로그아웃 프로세스를 통하여 user jwt auth에 따른 page 접근 관리
+- user login시 client cookie 생성하기
 
 ## node express + mongoDB 연결
 
@@ -16,6 +19,10 @@
 
 - https://blog.naver.com/qhanfckwsmsd/222527543826
 
-## 유저 정보 jwt을 이용한 쿠키 정보 전달
+## 유저 정보 jwt을 이용한 쿠키 정보 전달(1)
 
 - https://blog.naver.com/qhanfckwsmsd/222527594671
+
+## 유저 정보 jwt을 이용한 쿠키 정보 전달 (2)
+
+- https://blog.naver.com/qhanfckwsmsd/222527662410
