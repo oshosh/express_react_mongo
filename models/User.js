@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
-const dotenv = require('dotenv');
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 
 const userSchema = mongoose.Schema({
     name: {
@@ -17,7 +17,11 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        minlength: 5
+        minlength: 5,
+    },
+    lastname: {
+        type: String,
+        maxlength: 50
     },
     role: {
         type: Number,
@@ -65,14 +69,26 @@ userSchema.methods.generateToken = function (callback) {
     var user = this;
 
     var token = jwt.sign(user._id.toHexString(), process.env.COOKIE_SECRET);
-
-    // console.log(callback())
-
     user.token = token;
+
+    //인코드된 token db에 저장
     user.save(function (err, user) {
         if (err) return callback(err);
-
         callback(null, user);
+    });
+};
+
+userSchema.statics.findByToken = function (token, callback) {
+    var user = this;
+
+    // 토큰을 decode
+    jwt.verify(token, process.env.COOKIE_SECRET, function (err, decode) {
+        // 유저 아이디를 이용해서 유저를 찾은 다음에 클리언트에서 가져온 token과
+        //db에 보관된 token이 일치하는지 확인
+        user.findOne({ _id: decode, token: token }, function (err, user) {
+            if (err) return callback(err);
+            callback(null, user);
+        });
     });
 };
 
