@@ -2,6 +2,8 @@
 
 - 회원가입, 로그인, 로그아웃 프로세스를 통하여 user jwt auth에 따른 page 접근 관리
 - user login시 client cookie 생성하기
+- server에서 cors 모듈을 사용하지 않고 client에서 Proxy(http-proxy-middleware) 설정을 함
+- HOC 활용한 Auth 인증 관리 후 SpecifiComponent router 관리
 
 ## node express + mongoDB 연결
 
